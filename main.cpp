@@ -59,8 +59,14 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID);
   glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
+  /* compile our shaders */
+  GLuint programID = loadShaders( "../VertexShader.vert", "../FragmentShader.frag" );
+
+  /* initialise the clear color */
+  glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
   while(!glfwWindowShouldClose(window)) { /* keep swapping the buffers until we have to close the window */
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); /* Clear the screen */
     /* draw our triangle */
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID);
@@ -72,6 +78,10 @@ int main() {
         0,
         NULL
     );
+    /* tell openGL to use our shader */
+    glUseProgram(programID);
+
+    /* actually draw the array */
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(0);
 

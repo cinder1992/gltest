@@ -1,1 +1,0 @@
-/home/neil/Development/openGL/build/CMakeFiles/ogltest.dir

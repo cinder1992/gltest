@@ -1,1 +1,0 @@
-/usr/bin/clang++       CMakeFiles/ogltest.dir/loadShaders.cpp.o CMakeFiles/ogltest.dir/main.cpp.o  -o ogltest -rdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lGLEW -lglfw 
