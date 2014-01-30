@@ -9,24 +9,14 @@
 /home/neil/Development/openGL/loadShaders.cpp
 loadShaders.h
 /home/neil/Development/openGL/loadShaders.h
-
-/home/neil/Development/openGL/loadShaders.h
 GL/glew.h
 -
-cstdio
--
-
-/home/neil/Development/openGL/main.cpp
 cstdio
 -
 cstdlib
 -
-string
--
+
+/home/neil/Development/openGL/loadShaders.h
 GL/glew.h
 -
-GLFW/glfw3.h
--
-loadShaders.h
-/home/neil/Development/openGL/loadShaders.h
 

@@ -56,15 +56,15 @@ CMakeFiles/ogltest.dir/loadShaders.cpp.o: CMakeFiles/ogltest.dir/flags.make
 CMakeFiles/ogltest.dir/loadShaders.cpp.o: ../loadShaders.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/neil/Development/openGL/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ogltest.dir/loadShaders.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ogltest.dir/loadShaders.cpp.o -c /home/neil/Development/openGL/loadShaders.cpp
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ogltest.dir/loadShaders.cpp.o -c /home/neil/Development/openGL/loadShaders.cpp
 
 CMakeFiles/ogltest.dir/loadShaders.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ogltest.dir/loadShaders.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/neil/Development/openGL/loadShaders.cpp > CMakeFiles/ogltest.dir/loadShaders.cpp.i
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/neil/Development/openGL/loadShaders.cpp > CMakeFiles/ogltest.dir/loadShaders.cpp.i
 
 CMakeFiles/ogltest.dir/loadShaders.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ogltest.dir/loadShaders.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/neil/Development/openGL/loadShaders.cpp -o CMakeFiles/ogltest.dir/loadShaders.cpp.s
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/neil/Development/openGL/loadShaders.cpp -o CMakeFiles/ogltest.dir/loadShaders.cpp.s
 
 CMakeFiles/ogltest.dir/loadShaders.cpp.o.requires:
 .PHONY : CMakeFiles/ogltest.dir/loadShaders.cpp.o.requires
@@ -79,15 +79,15 @@ CMakeFiles/ogltest.dir/main.cpp.o: CMakeFiles/ogltest.dir/flags.make
 CMakeFiles/ogltest.dir/main.cpp.o: ../main.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/neil/Development/openGL/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ogltest.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ogltest.dir/main.cpp.o -c /home/neil/Development/openGL/main.cpp
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ogltest.dir/main.cpp.o -c /home/neil/Development/openGL/main.cpp
 
 CMakeFiles/ogltest.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ogltest.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/neil/Development/openGL/main.cpp > CMakeFiles/ogltest.dir/main.cpp.i
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/neil/Development/openGL/main.cpp > CMakeFiles/ogltest.dir/main.cpp.i
 
 CMakeFiles/ogltest.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ogltest.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/neil/Development/openGL/main.cpp -o CMakeFiles/ogltest.dir/main.cpp.s
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/neil/Development/openGL/main.cpp -o CMakeFiles/ogltest.dir/main.cpp.s
 
 CMakeFiles/ogltest.dir/main.cpp.o.requires:
 .PHONY : CMakeFiles/ogltest.dir/main.cpp.o.requires

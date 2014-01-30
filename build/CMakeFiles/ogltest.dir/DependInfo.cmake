@@ -7,7 +7,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/neil/Development/openGL/loadShaders.cpp" "/home/neil/Development/openGL/build/CMakeFiles/ogltest.dir/loadShaders.cpp.o"
   "/home/neil/Development/openGL/main.cpp" "/home/neil/Development/openGL/build/CMakeFiles/ogltest.dir/main.cpp.o"
   )
-SET(CMAKE_CXX_COMPILER_ID "GNU")
+SET(CMAKE_CXX_COMPILER_ID "Clang")
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
