@@ -1,0 +1,99 @@
+Scanning dependencies of target ogltest
+[ 50%] Building CXX object CMakeFiles/ogltest.dir/loadShaders.cpp.o
+/home/neil/Development/openGL/loadShaders.cpp: In function ‘GLuint loadShaders(const char*, const char*)’:
+/home/neil/Development/openGL/loadShaders.cpp:10:5: error: ‘string’ is not a member of ‘std’
+     std::string VertexShaderCode;
+     ^
+/home/neil/Development/openGL/loadShaders.cpp:10:17: error: expected ‘;’ before ‘VertexShaderCode’
+     std::string VertexShaderCode;
+                 ^
+/home/neil/Development/openGL/loadShaders.cpp:11:5: error: ‘ifstream’ is not a member of ‘std’
+     std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
+     ^
+/home/neil/Development/openGL/loadShaders.cpp:11:19: error: expected ‘;’ before ‘VertexShaderStream’
+     std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
+                   ^
+/home/neil/Development/openGL/loadShaders.cpp:12:8: error: ‘VertexShaderStream’ was not declared in this scope
+     if(VertexShaderStream.is_open())
+        ^
+/home/neil/Development/openGL/loadShaders.cpp:14:9: error: ‘string’ is not a member of ‘std’
+         std::string Line = "";
+         ^
+/home/neil/Development/openGL/loadShaders.cpp:14:21: error: expected ‘;’ before ‘Line’
+         std::string Line = "";
+                     ^
+/home/neil/Development/openGL/loadShaders.cpp:15:43: error: ‘Line’ was not declared in this scope
+         while(getline(VertexShaderStream, Line))
+                                           ^
+/home/neil/Development/openGL/loadShaders.cpp:16:13: error: ‘VertexShaderCode’ was not declared in this scope
+             VertexShaderCode += "\n" + Line;
+             ^
+/home/neil/Development/openGL/loadShaders.cpp:21:5: error: ‘string’ is not a member of ‘std’
+     std::string FragmentShaderCode;
+     ^
+/home/neil/Development/openGL/loadShaders.cpp:21:17: error: expected ‘;’ before ‘FragmentShaderCode’
+     std::string FragmentShaderCode;
+                 ^
+/home/neil/Development/openGL/loadShaders.cpp:22:5: error: ‘ifstream’ is not a member of ‘std’
+     std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
+     ^
+/home/neil/Development/openGL/loadShaders.cpp:22:19: error: expected ‘;’ before ‘FragmentShaderStream’
+     std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
+                   ^
+/home/neil/Development/openGL/loadShaders.cpp:23:8: error: ‘FragmentShaderStream’ was not declared in this scope
+     if(FragmentShaderStream.is_open()){
+        ^
+/home/neil/Development/openGL/loadShaders.cpp:24:9: error: ‘string’ is not a member of ‘std’
+         std::string Line = "";
+         ^
+/home/neil/Development/openGL/loadShaders.cpp:24:21: error: expected ‘;’ before ‘Line’
+         std::string Line = "";
+                     ^
+/home/neil/Development/openGL/loadShaders.cpp:25:45: error: ‘Line’ was not declared in this scope
+         while(getline(FragmentShaderStream, Line))
+                                             ^
+/home/neil/Development/openGL/loadShaders.cpp:26:13: error: ‘FragmentShaderCode’ was not declared in this scope
+             FragmentShaderCode += "\n" + Line;
+             ^
+/home/neil/Development/openGL/loadShaders.cpp:35:40: error: ‘VertexShaderCode’ was not declared in this scope
+     char const * VertexSourcePointer = VertexShaderCode.c_str();
+                                        ^
+/home/neil/Development/openGL/loadShaders.cpp:42:5: error: ‘vector’ is not a member of ‘std’
+     std::vector<char> VertexShaderErrorMessage(InfoLogLength);
+     ^
+/home/neil/Development/openGL/loadShaders.cpp:42:17: error: expected primary-expression before ‘char’
+     std::vector<char> VertexShaderErrorMessage(InfoLogLength);
+                 ^
+/home/neil/Development/openGL/loadShaders.cpp:42:17: error: expected ‘;’ before ‘char’
+/home/neil/Development/openGL/loadShaders.cpp:43:62: error: ‘VertexShaderErrorMessage’ was not declared in this scope
+     glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+                                                              ^
+/home/neil/Development/openGL/loadShaders.cpp:48:42: error: ‘FragmentShaderCode’ was not declared in this scope
+     char const * FragmentSourcePointer = FragmentShaderCode.c_str();
+                                          ^
+/home/neil/Development/openGL/loadShaders.cpp:55:5: error: ‘vector’ is not a member of ‘std’
+     std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
+     ^
+/home/neil/Development/openGL/loadShaders.cpp:55:17: error: expected primary-expression before ‘char’
+     std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
+                 ^
+/home/neil/Development/openGL/loadShaders.cpp:55:17: error: expected ‘;’ before ‘char’
+/home/neil/Development/openGL/loadShaders.cpp:56:64: error: ‘FragmentShaderErrorMessage’ was not declared in this scope
+     glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
+                                                                ^
+/home/neil/Development/openGL/loadShaders.cpp:69:5: error: ‘vector’ is not a member of ‘std’
+     std::vector<char> ProgramErrorMessage( max(InfoLogLength, int(1)) );
+     ^
+/home/neil/Development/openGL/loadShaders.cpp:69:17: error: expected primary-expression before ‘char’
+     std::vector<char> ProgramErrorMessage( max(InfoLogLength, int(1)) );
+                 ^
+/home/neil/Development/openGL/loadShaders.cpp:69:17: error: expected ‘;’ before ‘char’
+/home/neil/Development/openGL/loadShaders.cpp:70:58: error: ‘ProgramErrorMessage’ was not declared in this scope
+     glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+                                                          ^
+CMakeFiles/ogltest.dir/build.make:57: recipe for target 'CMakeFiles/ogltest.dir/loadShaders.cpp.o' failed
+make[2]: *** [CMakeFiles/ogltest.dir/loadShaders.cpp.o] Error 1
+CMakeFiles/Makefile2:63: recipe for target 'CMakeFiles/ogltest.dir/all' failed
+make[1]: *** [CMakeFiles/ogltest.dir/all] Error 2
+Makefile:75: recipe for target 'all' failed
+make: *** [all] Error 2
