@@ -9,6 +9,18 @@
 
 /* put all custom includes here */
 #include "loadShaders.h"
+
+/* declare our debugging code */
+#define GL(CODE)  ((CODE), GL_real(#CODE))
+
+int GL_real(const char* code_string) {
+  GLenum err = glGetError();
+  if (err != GL_NO_ERROR){
+    printf("opengl error: 0x%x\n", err);
+    printf("code: %s\n", code_string);
+  }
+  return (err = GL_NO_ERROR);
+}
 /* declare our constructors */
 void error_callback(int, const char*);
 void key_callback(GLFWwindow*, int, int, int, int);
@@ -53,40 +65,43 @@ int main() {
   }
 
   glfwSetKeyCallback(window, key_callback); /* set our key callback */
-
+  GL(0);
   /* set up our vertex array */
-  glGenBuffers(1, &VertexArrayID);
-  glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+  GL(glGenBuffers(1, &VertexArrayID));
+  GL(glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID));
+  GL(glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW));
 
   /* compile our shaders */
   GLuint programID = loadShaders( "../VertexShader.vert", "../FragmentShader.frag" );
+  GL(0); /* check error status */
+  GL(glUseProgram(programID));
 
   /* initialise the clear color */
-  glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+  GL(glClearColor(0.0f, 0.0f, 0.4f, 0.0f));
 
   while(!glfwWindowShouldClose(window)) { /* keep swapping the buffers until we have to close the window */
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); /* Clear the screen */
+    GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)); /* Clear the screen */
     /* draw our triangle */
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID);
-    glVertexAttribPointer(
+    GL(glEnableVertexAttribArray(0));
+
+    GL(glUseProgram(programID));
+    /* tell openGL to use our shader */
+    GL(glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID));
+    GL(glVertexAttribPointer(
         0,
         3,
         GL_FLOAT,
         GL_FALSE,
         0,
         NULL
-    );
-    /* tell openGL to use our shader */
-    glUseProgram(programID);
+    ));
 
     /* actually draw the array */
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(0);
+    GL(glDrawArrays(GL_TRIANGLES, 0, 3));
+    GL(glDisableVertexAttribArray(0));
 
     glfwSwapBuffers(window);
-    glfwPollEvents();
+    glfwWaitEvents();
   }
   glfwDestroyWindow(window); /* BANG CRUSH BYE-BYE WINDOW */
   glfwTerminate(); /* Cleanup after ourselves */

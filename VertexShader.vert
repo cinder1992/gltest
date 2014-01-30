@@ -1,5 +1,7 @@
 #version 330 core
+#extension GL_ARB_explicit_attrib_location: enable
 
+precision highp float;
 layout(location = 0) in vec3 vertexPosition_modelspace;
 
 void main() {
