@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/neil/Development/openGL/loadShaders.cpp
+loadShaders.h
+/home/neil/Development/openGL/loadShaders.h
+
+/home/neil/Development/openGL/loadShaders.h
+GL/glew.h
+-
+cstdio
+-
+
+/home/neil/Development/openGL/main.cpp
+cstdio
+-
+cstdlib
+-
+string
+-
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+loadShaders.h
+/home/neil/Development/openGL/loadShaders.h
+
