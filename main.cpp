@@ -30,6 +30,7 @@ int main() {
 
   /* Declare our variables */
   GLuint VertexArrayID;
+  GLuint vertexbuffer;
   static const GLfloat g_vertex_buffer_data[] = { /* Triangle vertex buffer data */
     -1.0f, -1.0f, 0.0f,
     1.0f, -1.0f, 0.0f,
@@ -67,8 +68,12 @@ int main() {
   glfwSetKeyCallback(window, key_callback); /* set our key callback */
   GL(0);
   /* set up our vertex array */
-  GL(glGenBuffers(1, &VertexArrayID));
-  GL(glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID));
+  GL(glGenVertexArrays(1, &VertexArrayID));
+  GL(glBindVertexArray(VertexArrayID));
+
+  /* Generate our buffer */
+  GL(glGenBuffers(1, &vertexbuffer));
+  GL(glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer));
   GL(glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW));
 
   /* compile our shaders */
@@ -80,13 +85,12 @@ int main() {
   GL(glClearColor(0.0f, 0.0f, 0.4f, 0.0f));
 
   while(!glfwWindowShouldClose(window)) { /* keep swapping the buffers until we have to close the window */
-    GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)); /* Clear the screen */
+    GL(glClear(GL_COLOR_BUFFER_BIT)); /* Clear the screen */
     /* draw our triangle */
-    GL(glEnableVertexAttribArray(0));
-
     GL(glUseProgram(programID));
-    /* tell openGL to use our shader */
-    GL(glBindBuffer(GL_ARRAY_BUFFER, VertexArrayID));
+    GL(glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer));
+    
+    GL(glEnableVertexAttribArray(0));
     GL(glVertexAttribPointer(
         0,
         3,
@@ -96,6 +100,7 @@ int main() {
         NULL
     ));
 
+    /* tell openGL to use our shader */
     /* actually draw the array */
     GL(glDrawArrays(GL_TRIANGLES, 0, 3));
     GL(glDisableVertexAttribArray(0));
@@ -105,6 +110,8 @@ int main() {
   }
   glfwDestroyWindow(window); /* BANG CRUSH BYE-BYE WINDOW */
   glfwTerminate(); /* Cleanup after ourselves */
+  glDeleteBuffers(1, &vertexbuffer);
+  glDeleteVertexArrays(1, &VertexArrayID);
   return 0;
 }
 
