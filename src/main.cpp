@@ -35,15 +35,48 @@ int main() {
   GLuint VertexArrayID;
   GLuint vertexbuffer;
   static const GLfloat g_vertex_buffer_data[] = { /* Triangle vertex buffer data */
-    -1.0f, -1.0f, 0.0f,
-    1.0f, -1.0f, 0.0f,
-    0.0f, 1.0f, 0.0f,
+        -1.0f,-1.0f,-1.0f, // triangle 1 : begin
+        -1.0f,-1.0f, 1.0f,
+        -1.0f, 1.0f, 1.0f, // triangle 1 : end
+         1.0f, 1.0f,-1.0f, // triangle 2 : begin
+        -1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f, // triangle 2 : end
+         1.0f,-1.0f, 1.0f,
+        -1.0f,-1.0f,-1.0f,
+         1.0f,-1.0f,-1.0f,
+         1.0f, 1.0f,-1.0f,
+         1.0f,-1.0f,-1.0f,
+        -1.0f,-1.0f,-1.0f,
+        -1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f, 1.0f,
+        -1.0f, 1.0f,-1.0f,
+         1.0f,-1.0f, 1.0f,
+        -1.0f,-1.0f, 1.0f,
+        -1.0f,-1.0f,-1.0f,
+        -1.0f, 1.0f, 1.0f,
+        -1.0f,-1.0f, 1.0f,
+         1.0f,-1.0f, 1.0f,
+         1.0f, 1.0f, 1.0f,
+         1.0f,-1.0f,-1.0f,
+         1.0f, 1.0f,-1.0f,
+         1.0f,-1.0f,-1.0f,
+         1.0f, 1.0f, 1.0f,
+         1.0f,-1.0f, 1.0f,
+         1.0f, 1.0f, 1.0f,
+         1.0f, 1.0f,-1.0f,
+        -1.0f, 1.0f,-1.0f,
+         1.0f, 1.0f, 1.0f,
+        -1.0f, 1.0f,-1.0f,
+        -1.0f, 1.0f, 1.0f,
+         1.0f, 1.0f, 1.0f,
+        -1.0f, 1.0f, 1.0f,
+         1.0f,-1.0f, 1.0f,
   };
 
   /* Declare our matricies */
   glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
   glm::mat4 Veiw = glm::lookAt(
-          glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+          glm::vec3(4,3,-3), // Camera is at (4,3,3), in World Space
           glm::vec3(0,0,0), // and looks at the origin
           glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
       );
@@ -80,6 +113,11 @@ int main() {
 
   glfwSetKeyCallback(window, key_callback); /* set our key callback */
   GL(0);
+
+  /* enable GL_DEPTH_TEST */
+
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
   /* set up our vertex array */
   GL(glGenVertexArrays(1, &VertexArrayID));
   GL(glBindVertexArray(VertexArrayID));
@@ -98,10 +136,14 @@ int main() {
   /* initialise the clear color */
   GL(glClearColor(0.0f, 0.0f, 0.4f, 0.0f));
 
-    GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+  GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+  glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+
+  GLuint ModMatrixID = glGetUniformLocation(programID, "ModelMatrix");
+  glUniformMatrix4fv(ModMatrixID, 1, GL_FALSE, &Model[0][0]);
+
   while(!glfwWindowShouldClose(window)) { /* keep swapping the buffers until we have to close the window */
-    GL(glClear(GL_COLOR_BUFFER_BIT)); /* Clear the screen */
+    GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)); /* Clear the screen */
     /* draw our triangle */
     GL(glUseProgram(programID));
     /* Make sure our shader has our matricies to work with */
@@ -120,7 +162,7 @@ int main() {
 
     /* tell openGL to use our shader */
     /* actually draw the array */
-    GL(glDrawArrays(GL_TRIANGLES, 0, 3));
+    GL(glDrawArrays(GL_TRIANGLES, 0, 12*3));
     GL(glDisableVertexAttribArray(0));
 
     glfwSwapBuffers(window);
