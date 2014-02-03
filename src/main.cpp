@@ -6,6 +6,9 @@
 /* include GLEW, GLWF, and glm */
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+// glm::translate, glm::rotate, glm::scale
+#include <glm/gtc/matrix_transform.hpp> 
 
 /* put all custom includes here */
 #include "loadShaders.h"
@@ -36,6 +39,16 @@ int main() {
     1.0f, -1.0f, 0.0f,
     0.0f, 1.0f, 0.0f,
   };
+
+  /* Declare our matricies */
+  glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+  glm::mat4 Veiw = glm::lookAt(
+          glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+          glm::vec3(0,0,0), // and looks at the origin
+          glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+      );
+  glm::mat4 Model = glm::mat4(1.0f);
+  glm::mat4 MVP = Projection * Veiw * Model;
 
   if (!glfwInit()) { /* Initialise glfw and check for errors */
     fprintf( stderr, "Failed to initialise GLFW\n");
@@ -77,17 +90,22 @@ int main() {
   GL(glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW));
 
   /* compile our shaders */
-  GLuint programID = loadShaders( "../VertexShader.vert", "../FragmentShader.frag" );
+  GLuint programID = loadShaders( "shaders/VertexShader.vert", "shaders/FragmentShader.frag" );
   GL(0); /* check error status */
   GL(glUseProgram(programID));
 
+  
   /* initialise the clear color */
   GL(glClearColor(0.0f, 0.0f, 0.4f, 0.0f));
 
+    GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
   while(!glfwWindowShouldClose(window)) { /* keep swapping the buffers until we have to close the window */
     GL(glClear(GL_COLOR_BUFFER_BIT)); /* Clear the screen */
     /* draw our triangle */
     GL(glUseProgram(programID));
+    /* Make sure our shader has our matricies to work with */
+
     GL(glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer));
     
     GL(glEnableVertexAttribArray(0));
