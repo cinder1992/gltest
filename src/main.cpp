@@ -135,21 +135,20 @@ int main() {
   
   /* initialise the clear color */
   GL(glClearColor(0.0f, 0.0f, 0.4f, 0.0f));
-
+  /* Get the location of our uniform values in the shader */
   GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-  glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
   GLuint ModMatrixID = glGetUniformLocation(programID, "ModelMatrix");
-  glUniformMatrix4fv(ModMatrixID, 1, GL_FALSE, &Model[0][0]);
 
   while(!glfwWindowShouldClose(window)) { /* keep swapping the buffers until we have to close the window */
-    GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)); /* Clear the screen */
-    /* draw our triangle */
+    GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)); /* clear the screen */
+    /* give our shader program our matricies */
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+    glUniformMatrix4fv(ModMatrixID, 1, GL_FALSE, &Model[0][0]);
+    /* enable our program */
     GL(glUseProgram(programID));
-    /* Make sure our shader has our matricies to work with */
-
+    /* Bind our buffer */
     GL(glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer));
-    
+    /* use attrib array 0 */
     GL(glEnableVertexAttribArray(0));
     GL(glVertexAttribPointer(
         0,
@@ -159,12 +158,10 @@ int main() {
         0,
         NULL
     ));
-
-    /* tell openGL to use our shader */
     /* actually draw the array */
     GL(glDrawArrays(GL_TRIANGLES, 0, 12*3));
     GL(glDisableVertexAttribArray(0));
-
+    /* swap buffers and wait for input */
     glfwSwapBuffers(window);
     glfwWaitEvents();
   }
@@ -172,6 +169,7 @@ int main() {
   glfwTerminate(); /* Cleanup after ourselves */
   glDeleteBuffers(1, &vertexbuffer);
   glDeleteVertexArrays(1, &VertexArrayID);
+  glDeleteProgram(programID); /* Prevent more clutter */
   return 0;
 }
 
